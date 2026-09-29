@@ -149,6 +149,7 @@ Dermatology-Disease-Classification/
 ├── dermatologyDataset.csv   # Original dataset
 ├── dermatology_disease_classification.ipynb.ipynb # Original research notebook
 ├── test_app.py              # Automated end-to-end integration test suite
+├── render.yaml              # Render Web Service Infrastructure-as-Code specification
 ├── .gitignore               # Ignores node_modules, .venv, caches
 └── README.md                # Project documentation
 ```
@@ -219,6 +220,32 @@ npm run dev
 ```
 
 - **Vite Dev App:** [http://127.0.0.1:5173](http://127.0.0.1:5173) (requests are automatically proxied to `:8000`)
+
+---
+
+## ☁️ Deployment (Render Web Service)
+
+This application is ready for 1-click single-service deployment on **Render** using the included [`render.yaml`](render.yaml) blueprint.
+
+### Service Settings
+- **Service Type:** Web Service
+- **Runtime:** `Python 3.11`
+- **Build Command:** `pip install -r backend/requirements.txt`
+- **Start Command:** `uvicorn main:app --app-dir backend --host 0.0.0.0 --port $PORT`
+
+### Steps to Deploy
+1. Sign in to [Render](https://render.com).
+2. Click **New +** → **Blueprint** (or **Web Service**).
+3. Connect your GitHub repository: `https://github.com/jyothsna1506/Dermatology-Disease-Classification`.
+4. Render will automatically detect [`render.yaml`](render.yaml) and configure the build and start commands.
+5. Click **Apply**. Render will build the environment and launch your application.
+
+### Deployed Application Endpoints
+Once deployed, your service will be live at:
+- **Web Application Dashboard:** `https://<your-service-name>.onrender.com/`
+- **Prediction API Endpoint:** `https://<your-service-name>.onrender.com/predict` (or `/api/predict`)
+- **Health Check Endpoint:** `https://<your-service-name>.onrender.com/health`
+- **Interactive Swagger Documentation:** `https://<your-service-name>.onrender.com/docs`
 
 ---
 
